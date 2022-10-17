@@ -370,7 +370,7 @@ padding-left: 0;
 
         </ul>  
       </div>
-      <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" id="popup" onclick= 'location.href = "../booking.php?view=<?php echo $row["flat_id"];?>"'>Confirm Booking</button></center>  
+      <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" id="popup" onclick= 'location.href = "../booking.php?view=<?php echo $flat_id;?>"'>Confirm Booking</button></center>  
     </div>
     <div id="section3">
       <div class="title-box-d">
