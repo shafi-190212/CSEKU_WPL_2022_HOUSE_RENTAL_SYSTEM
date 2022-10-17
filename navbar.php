@@ -229,7 +229,6 @@
       </button>
       <div class="dropdown-content">
         <a href="http://localhost/House_Rent_Web/testimonials.php" id="testimonial">Testimonials</a>
-        <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
       </div>
     </div>
     <a href="http://localhost/House_Rent_Web/contact.php" id="contact">Contact</a>
@@ -243,15 +242,26 @@
           <a href="http://localhost/House_Rent_Web/register.php">Signup</a>
         </div>
 
-      <?php } else { ?>
+      <?php } else if(htmlspecialchars($_SESSION["role_id"] == 1 or $_SESSION["role_id"] == 2)){ ?>
         <button class="dropbtn" id="login">Dashboard
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
           <a href="http://localhost/House_Rent_Web/admin/welcome.php">Dashboard</a>
+          <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
+          <a href="http://localhost/House_Rent_Web/logout.php">Logout</a>
+        </div>
+      <?php }else{ ?>
+        <button class="dropbtn" id="login">Profile
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
           <a href="http://localhost/House_Rent_Web/logout.php">Logout</a>
         </div>
       <?php } ?>
+        
+
     </div>
 
     <?php if (!isset($_SESSION["loggedin"])) { ?>
