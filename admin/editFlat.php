@@ -15,10 +15,11 @@ include "./functions/flatEdit_functions.php"
                <!-- Register Start -->
                <div class="row border m-5">
                     <div class="col-12 p-4">
-                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-outline mb-4">
+                                             <input type="hidden" name="id" value="<?php echo $flat_id ?>">
                                              <label class="form-label" class="py-4">House Name</label>
                                              <select type="text" name="home_id" class="form-control" placeholder="Enter House Name">
                                                   <option selected disabled><?php echo $house_name ?></option>
@@ -37,7 +38,7 @@ include "./functions/flatEdit_functions.php"
                                    <div class="col-md-6">
                                         <div class="form-outline mb-4">
                                              <label class="form-label" for="form2Example1" class="py-4">Flat Images</label>
-                                             <input type="file" name="flat_images[]" id="form2Example1" class="form-control <?php echo (!empty($district_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $district; ?>" placeholder="Enter District" multiple />
+                                             <input type="file" name="flat_images[]" class="form-control" multiple />
                                              <span class="invalid-feedback"><?php echo $district_err; ?></span>
                                         </div>
                                    </div>

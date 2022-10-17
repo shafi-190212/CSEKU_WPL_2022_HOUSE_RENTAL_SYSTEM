@@ -1,6 +1,6 @@
 <?php
 include "./functions/flatDetails_functions.php";
-include "../../House_Rent_Web/functions/testimonials.php";
+include "../functions/testimonials.php";
 ?>
 
 <!DOCTYPE html>
@@ -57,134 +57,134 @@ padding-left: 0;
   font-weight: 600;
   margin-left: -40px;
 }
-  .summary-list {
-    padding-right: 1rem;
-    color: #000000;
-  }
+.summary-list {
+  padding-right: 1rem;
+  color: #000000;
+}
 
-  .summary-list .list {
-    padding: 0;
-    line-height: 1.5;
-    font-size: 20px;
-  }
+.summary-list .list {
+  padding: 0;
+  line-height: 1.5;
+  font-size: 20px;
+}
 
-  .summary-list .list span {
-    color: #555555;
-  }
+.summary-list .list span {
+  color: #555555;
+}
 
-  .title-box-d {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-  }
+.title-box-d {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
 
-  .title-box-d .title-d {
-    font-weight: 600;
-    font-size: 2rem;
-    color: var(--primary)
-  }
+.title-box-d .title-d {
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--primary)
+}
 
-  .title-box-d .title-d:after {
-    content: '';
-    position: absolute;
-    width: 35%;
-    height: 4px;
-    background-color: #2eca6a;
-    bottom: 20px;
-    left: 0;
-  }
+.title-box-d .title-d:after {
+  content: '';
+  position: absolute;
+  width: 35%;
+  height: 4px;
+  background-color: #2eca6a;
+  bottom: 20px;
+  left: 0;
+}
 
-  .col-items-a {
-    flex: 2;
-    padding: 16px;
-  }
+.col-items-a {
+  flex: 2;
+  padding: 16px;
+}
 
-  .col-items-b {
-    flex: 1;
-    padding: 16px;
-  }
+.col-items-b {
+  flex: 1;
+  padding: 16px;
+}
 
-  .description {
-    line-height: 1.5;
-    font-size: 18px;
-    color: gray;
-    padding-left: 2%;
-    padding-right: 12%;
+.description {
+  line-height: 1.5;
+  font-size: 18px;
+  color: gray;
+  padding-left: 2%;
+  padding-right: 12%;
 
-  }
+}
 
-  .list-a {
-    display: inline-block;
-    line-height: 1.5;
-    padding: 0;
-    list-style: none;
-    font-size: 20px;
-  }
+.list-a {
+  display: inline-block;
+  line-height: 1.5;
+  padding: 0;
+  list-style: none;
+  font-size: 20px;
+}
 
-  .list-a li {
-    position: relative;
-    width: 50%;
-    float: left;
-    padding-left: 25px;
-    padding-right: 5px;
-  }
+.list-a li {
+  position: relative;
+  width: 50%;
+  float: left;
+  padding-left: 25px;
+  padding-right: 5px;
+}
 
-  .list-a li:before {
-    content: '';
-    width: 10px;
-    height: 2px;
-    position: absolute;
-    background-color: #313131;
-    top: 15px;
-    left: 0;
-  }
+.list-a li:before {
+  content: '';
+  width: 10px;
+  height: 2px;
+  position: absolute;
+  background-color: #313131;
+  top: 15px;
+  left: 0;
+}
 
-  .property-agent .title-agent {
-    font-weight: 600;
-  }
+.property-agent .title-agent {
+  font-weight: 600;
+}
 
-  .property-agent ul {
-    line-height: 2;
-    color: #000000;
-  }
+.property-agent ul {
+  line-height: 2;
+  color: #000000;
+}
 
-  .property-agent .socials-a {
-    text-align: center;
-  }
+.property-agent .socials-a {
+  text-align: center;
+}
 
-  .list-unstyled {
-    padding-left: 0;
-    list-style: none
-  }
+.list-unstyled {
+  padding-left: 0;
+  list-style: none
+}
 
-  .list-inline {
-    padding-left: 0;
-    list-style: none
-  }
+.list-inline {
+  padding-left: 0;
+  list-style: none
+}
 
-  .list-inline-item {
-    display: inline-block
-  }
+.list-inline-item {
+  display: inline-block
+}
 
-  .list-inline-item:not(:last-child) {
-    margin-right: .5rem
-  }
+.list-inline-item:not(:last-child) {
+  margin-right: .5rem
+}
 
-  .title-agent {
+.title-agent {
     font-size: 24px;
     font-weight: 400;
 
   }
-  .row{
+.row{
     padding: 1rem 2rem;
   }
 
-  .grid-container {
+.grid-container {
   
   display: grid;
   grid-gap: 2rem;
   grid-template-areas: 
-  'intro intro intro intro intro'
+  'intro intro intro section2 section2'
   'section1 section1 section1 section2 section2'
   'section3 section3 section3 section4 section4' 
   'section5 section5 section6 section6 section6' 
@@ -204,9 +204,11 @@ padding-left: 0;
 }
 
 #section2{
+  padding: 6rem 0 0rem !important;
   grid-area: section2;
   min-width: 420px;
   justify-self: center;
+  align-self: center;
 }
 
 #section3{
@@ -227,7 +229,7 @@ padding-left: 0;
 #section5{
   grid-area: section5;
   max-width:500px;
-  padding-left: 5rem !important;
+  padding-left: 10rem !important;
   padding-right: 3rem !important;
   justify-self: center;
  
@@ -235,7 +237,7 @@ padding-left: 0;
 #section6{
   grid-area: section6;
   min-width: 500px;
-  padding-right: 3rem !important;
+  padding-right: 2rem !important;
   justify-self: center;
 }
 
@@ -305,23 +307,13 @@ padding-left: 0;
     </section>
     <div class="slideshow-container" style="float:left;" id="section1">
 
+      <?php foreach ($images as $img){?>
       <div class="mySlides fade">
         <div class="numbertext">1 / 3</div>
-        <img src="../img/property-1.jpg" style="width:100%;">
+        <img src="../img/flat_images/<?php echo $img;?>" style="width:100%;">
         <div class="text">Caption Text</div>
       </div>
-
-      <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="../img/property-2.jpg" style="width:100%;">
-        <div class="text">Caption Two</div>
-      </div>
-
-      <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="../img/property-3.jpg" style="width:100%;">
-        <div class="text">Caption Three</div>
-      </div>
+      <?php };?>
 
       <!-- Next and previous buttons -->
       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -378,7 +370,7 @@ padding-left: 0;
 
         </ul>  
       </div>
-      <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" id="popup" onclick="div_show()">Confirm Boooking</button></center>  
+      <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" id="popup" onclick= 'location.href = "../booking.php?view=<?php echo $row["flat_id"];?>"'>Confirm Booking</button></center>  
     </div>
     <div id="section3">
       <div class="title-box-d">
@@ -484,5 +476,4 @@ padding-left: 0;
       }
   </script>
 </body>
-
 </html>

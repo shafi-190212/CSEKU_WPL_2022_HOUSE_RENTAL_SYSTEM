@@ -1,5 +1,6 @@
 <?php
-session_start();
+include "admin/functions/flatDetails_functions.php";
+include "functions/testimonials.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +25,8 @@ session_start();
 </head>
 
 <style>
-
-  /*------/ Intro Single /------*/
-
 .intro-single {
-padding: 12rem 0 3rem;
+padding: 2.5rem 0 0rem;
 }
 
 .intro-single .title-single-box {
@@ -59,474 +57,422 @@ padding-left: 0;
   font-weight: 600;
   margin-left: -40px;
 }
-  .summary-list {
-    padding-right: 1rem;
-    color: #000000;
-  }
+.summary-list {
+  padding-right: 1rem;
+  color: #000000;
+}
 
-  .summary-list .list {
-    padding: 0;
-    line-height: 1.5;
-    font-size: 20px;
-  }
+.summary-list .list {
+  padding: 0;
+  line-height: 1.5;
+  font-size: 20px;
+}
 
-  .summary-list .list span {
-    color: #555555;
-  }
+.summary-list .list span {
+  color: #555555;
+}
 
-  .title-box-d {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-  }
+.title-box-d {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
 
-  .title-box-d .title-d {
-    font-weight: 600;
-    font-size: 2rem;
-    color: var(--primary)
-  }
+.title-box-d .title-d {
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--primary)
+}
 
-  .title-box-d .title-d:after {
-    content: '';
-    position: absolute;
-    width: 35%;
-    height: 4px;
-    background-color: #2eca6a;
-    bottom: 20px;
-    left: 0;
-  }
+.title-box-d .title-d:after {
+  content: '';
+  position: absolute;
+  width: 35%;
+  height: 4px;
+  background-color: #2eca6a;
+  bottom: 20px;
+  left: 0;
+}
 
-  .col-items-a {
-    flex: 2;
-    padding: 16px;
-  }
+.col-items-a {
+  flex: 2;
+  padding: 16px;
+}
 
-  .col-items-b {
-    flex: 1;
-    padding: 16px;
-  }
+.col-items-b {
+  flex: 1;
+  padding: 16px;
+}
 
-  .description {
-    line-height: 1.5;
-    font-size: 18px;
-    color: gray;
-    padding-left: 2%;
-    padding-right: 12%;
+.description {
+  line-height: 1.5;
+  font-size: 18px;
+  color: gray;
+  padding-left: 2%;
+  padding-right: 12%;
 
-  }
+}
 
-  .list-a {
-    display: inline-block;
-    line-height: 1.5;
-    padding: 0;
-    list-style: none;
-    font-size: 20px;
-  }
+.list-a {
+  display: inline-block;
+  line-height: 1.5;
+  padding: 0;
+  list-style: none;
+  font-size: 20px;
+}
 
-  .list-a li {
-    position: relative;
-    width: 50%;
-    float: left;
-    padding-left: 25px;
-    padding-right: 5px;
-  }
+.list-a li {
+  position: relative;
+  width: 50%;
+  float: left;
+  padding-left: 25px;
+  padding-right: 5px;
+}
 
-  .list-a li:before {
-    content: '';
-    width: 10px;
-    height: 2px;
-    position: absolute;
-    background-color: #313131;
-    top: 15px;
-    left: 0;
-  }
+.list-a li:before {
+  content: '';
+  width: 10px;
+  height: 2px;
+  position: absolute;
+  background-color: #313131;
+  top: 15px;
+  left: 0;
+}
 
-  .property-agent .title-agent {
-    font-weight: 600;
-  }
+.property-agent .title-agent {
+  font-weight: 600;
+}
 
-  .property-agent ul {
-    line-height: 2;
-    color: #000000;
-  }
+.property-agent ul {
+  line-height: 2;
+  color: #000000;
+}
 
-  .property-agent .socials-a {
-    text-align: center;
-  }
+.property-agent .socials-a {
+  text-align: center;
+}
 
-  .list-unstyled {
-    padding-left: 0;
-    list-style: none
-  }
+.list-unstyled {
+  padding-left: 0;
+  list-style: none
+}
 
-  .list-inline {
-    padding-left: 0;
-    list-style: none
-  }
+.list-inline {
+  padding-left: 0;
+  list-style: none
+}
 
-  .list-inline-item {
-    display: inline-block
-  }
+.list-inline-item {
+  display: inline-block
+}
 
-  .list-inline-item:not(:last-child) {
-    margin-right: .5rem
-  }
+.list-inline-item:not(:last-child) {
+  margin-right: .5rem
+}
 
-  .title-agent {
+.title-agent {
     font-size: 24px;
     font-weight: 400;
 
   }
-  .row{
+.row{
     padding: 1rem 2rem;
   }
-/*----------------------------------------------
-CSS settings for HTML div Exact Center
-------------------------------------------------*/
-#abc {
-width: 100%;
-height:100%;
-opacity:1;
-top:0;
-left:0;
-display:none;
-position:fixed;
-background-color:#313131;
-overflow:auto;
+
+.grid-container {
+  
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-areas: 
+  'intro intro intro section2 section2'
+  'section1 section1 section1 section2 section2'
+  'section3 section3 section3 section4 section4' 
+  'section5 section5 section6 section6 section6' 
+  ;
+  justify-content: center;
+  padding-right: 2rem;
+  margin-bottom: 5rem;
 }
-img#close {
-position:absolute;
-right:-14px;
-top:-14px;
-cursor:pointer
+#navbar{
+  grid-area: navbar;
 }
-div#popupContact {
-position:absolute;
-top: 50%;
-left: 50%;
-transform: translate(-100%, -40%);
-font-family:'Raleway',sans-serif
+
+#section1{
+  grid-area: section1;
+  min-width: 800px;
+  padding-left: 3rem !important;
 }
-form {
-max-width:600px;
-min-width:400px;
-padding:10px 50px;
-border:2px solid gray;
-border-radius:10px;
-font-family:raleway;
-background-color:#fff
+
+#section2{
+  padding: 6rem 0 0rem !important;
+  grid-area: section2;
+  min-width: 420px;
+  justify-self: center;
+  align-self: center;
 }
-p {
-margin-top:30px
+
+#section3{
+  grid-area: section3;
+  padding-left: 5rem !important;
+  padding-right: 3rem !important;
+  justify-self: center;
+ 
 }
-h2 {
-background-color:#FEFFED;
-padding:20px 35px;
-margin:-10px -50px;
-text-align:center;
-border-radius:10px 10px 0 0
+
+#section4{
+  grid-area: section4;
+  padding-right: 3rem !important;
+  justify-self: center;
+ 
 }
-hr {
-margin:10px -50px;
-border:0;
-border-top:1px solid #ccc
+
+#section5{
+  grid-area: section5;
+  max-width:500px;
+  padding-left: 10rem !important;
+  padding-right: 3rem !important;
+  justify-self: center;
+ 
 }
-input[type=text] {
-width:100%;
-padding:10px;
-margin-top:30px;
-border:1px solid #ccc;
-padding-left:40px;
-font-size:16px;
-font-family:raleway
+#section6{
+  grid-area: section6;
+  min-width: 500px;
+  padding-right: 2rem !important;
+  justify-self: center;
 }
-#name {
-background-image:url(../images/name.jpg);
-background-repeat:no-repeat;
-background-position:5px 7px
+
+
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 650px) {
+  .grid-container{
+  padding-left:2rem;
+  padding-right: 2rem;
+  grid-gap: 1.5rem;
+  grid-template-areas: 
+  'intro '
+  'section1'
+  'section2' 
+  'section3' 
+  'section4' 
+  'section5' 
+  'section6' 
+  ;
+  justify-items: center;
+  }
+
+   .input-box {
+  height: 50px;
+  margin: 12px 0;
 }
-#email {
-background-image:url(../images/email.png);
-background-repeat:no-repeat;
-background-position:5px 7px
+ .input-box input,textarea{
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  padding: 0 15px;
+  resize: none;
 }
-textarea {
-background-image:url(../images/msg.png);
-background-repeat:no-repeat;
-background-position:5px 7px;
-width:100%;
-height:95px;
-padding:10px;
-resize:none;
-margin-top:30px;
-border:1px solid #ccc;
-padding-left:40px;
-font-size:16px;
-font-family:raleway;
-margin-bottom:30px
+ .message-box{
+  min-height: 110px;
 }
-#submit {
-text-decoration:none;
-width:100%;
-text-align:center;
-display:block;
-background-color:#FFBC00;
-color:#fff;
-border:1px solid #FFCB00;
-padding:10px 0;
-font-size:20px;
-cursor:pointer;
-border-radius:5px
+ .input-box textarea{
+  padding-top: 6px;
 }
+ .button-contact{
+  display: inline-block;
+  margin-top: 12px;
+}
+}
+
 
 </style>
 
 <body>
-
   <?php include 'navbar.php' ?>
-  <section class="intro-single pt-5 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="title-single-box">
-            <h1 class="title-single">Golden Urban House</h1>
-            <span class="color-text-a">23 Street, New York, USA</span>
+  <div class="grid-container">
+    <section class="intro-single" id="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title-single-box">
+              <h1 class="title-single"><?php echo $house_name?></h1>
+              <span class="color-text-a">Road no:<?php echo $road_no?> ,  <?php echo $thana?> , <?php echo $district?></span>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+    <div class="slideshow-container" style="float:left;" id="section1">
+
+      <?php foreach ($images as $img){?>
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="img/flat_images/<?php echo $img;?>" style="width:100%;">
+        <div class="text">Caption Text</div>
+      </div>
+      <?php };?>
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div id="section2">
+      <div class="title-box-d section-t4">
+        <h3 class="title-d">Quick Summary</h3>
+      </div>
+      <div class="summary-list">
+        <ul class="list">
+          <li class="d-flex justify-content-between">
+            <strong>Property ID:</strong>1134
+            <span></span>
+          </li>
+          
+          <li class="d-flex justify-content-between">
+            <strong>Available from:</strong> <?php echo $available_from; ?>
+            <span></span>
+          </li>
+
+          <li class="d-flex justify-content-between">
+            <strong>Location:</strong>  <?php echo $thana?> , <?php echo $district?>
+            <span></span>
+          </li>
+
+          <li class="d-flex justify-content-between">
+            <strong>Ward:</strong><?php echo $ward?>
+            <span></span>
+            <strong>Road No:</strong><?php echo $road_no?>
+            <span></span>
+          </li>
+          
+          <li class="d-flex justify-content-between">
+            <strong>Floor:</strong><?php echo $floor?>
+            <span></span>
+            <strong>Flat No:</strong><?php echo $flat_no?>
+            <span></span>
+          </li>
+          <li class="d-flex justify-content-between">
+            <strong>Bedroom:</strong><?php echo $bedroom_no?>
+            <span></span>
+            <strong>Bathroom:</strong><?php echo $bathroom_no?>
+            <span></span>
+            
+          </li>
+          <li class="d-flex justify-content-between">
+            <strong>Kitchen:</strong><?php echo $kitchen_no?>
+            <span></span>
+            <strong>Dining Room:</strong><?php echo $dining_room_no?>
+            <span></span>
+          </li>
+
+        </ul>  
+      </div>
+      <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" onclick= 'location.href = "booking.php?view=<?php echo $flat_id;?>"'>Confirm Booking</button></center>  
+    </div>
+    <div id="section3">
+      <div class="title-box-d">
+        <h3 class="title-d">Property Description</h3>
+      </div>
+      <div class="property-description ">
+        <p class="description">
+          <?php echo $description?>
+        </p>
+        <p class="description">
+          Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
+          malesuada. Quisque velit nisi,
+          pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+        </p>
       </div>
     </div>
-  </section>
-
-  <div class="container">
-    <div class="row col-container">
-
-      <div class="col-items-a">
-        <div class="slideshow-container" style="float:left;">
-
-          <div class="mySlides fade">
-            <div class="numbertext">1 / 3</div>
-            <img src="img/property-1.jpg" style="width:100%; height:70vh">
-            <div class="text">Caption Text</div>
-          </div>
-
-          <div class="mySlides fade">
-            <div class="numbertext">2 / 3</div>
-            <img src="img/property-2.jpg" style="width:100%; height:70vh">
-            <div class="text">Caption Two</div>
-          </div>
-
-          <div class="mySlides fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="img/property-3.jpg" style="width:100%; height:70vh">
-            <div class="text">Caption Three</div>
-          </div>
-
-          <!-- Next and previous buttons -->
-          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-          <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <div id="abc">
-        <!-- Popup Div Starts Here -->
-        <div id="popupContact">
-            <!-- Contact Us Form -->
-            <form action="#" id="form" method="post" name="form">
-                <img id="close" src="img/close.png" onclick ="div_hide()" style="width: 5%;">
-                <h2>Contact Us</h2>
-                <hr>
-                <input id="name" name="name" placeholder="Name" type="text">
-                <input id="email" name="email" placeholder="Email" type="text">
-                <textarea id="msg" name="message" placeholder="Message"></textarea>
-                <a href="javascript:%20check_empty()" id="submit">Send</a>
-            </form>
-        </div>
-        <!-- Popup Div Ends Here -->
-        </div>
+    <div id="section4">
+      <div class="title-box-d">
+        <h3 class="title-d">Facilities</h3>
       </div>
-      <div class="col-items-b pt-0"  style="padding-left:10px; margin-right:10px;">
-        <div class="title-box-d section-t4">
-          <h3 class="title-d">Quick Summary</h3>
+      <div class="amenities-list">
+        <ul class="list-a" style="margin:0;">
+          <li>Balcony</li>
+          <li>Outdoor Kitchen</li>
+          <li>Cable Tv</li>
+          <li>Internet</li>
+          <li>Parking</li>
+        </ul>
+      </div>
+    </div>
+    <div id="section5">
+      <div class="title-box-d">
+        <h3 class="title-d">Contact Agent</h3>
+      </div>
+      <div class="property-agent">
+        <h4 class="title-agent"><strong>Name: </strong><?php echo $user_name;?></h4>
+        <ul class="list-unstyled">
+          <li class="d-flex justify-content-between">
+            <strong>Contact No:</strong>
+            <span class="color-text-a"><?php echo $contact_no?></span>
+          </li>
+          <li class="d-flex justify-content-between">
+            <strong>NID:</strong>
+            <span class="color-text-a"><?php echo $nid;?></span>
+          </li>
+          <li class="d-flex justify-content-between">
+            <strong>Email:</strong>
+            <span class="color-text-a"><?php echo $user_email;?></span>
+          </li>
+          <li class="d-flex justify-content-between">
+            <strong>Location:</strong>
+            <span class="color-text-a"><?php echo $user_address ?></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div id="section6">
+      <div class="title-box-d">
+        <h3 class="title-d">Send a message</h3>
+      </div>
+      <div>
+        <input type="name" class="form-control" placeholder="Your Name" />
+        <input type="email" class="form-control" placeholder="Your email" />
+        <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
+        <button style="background-color:#00B98E;margin-top:20px;">Send Message</button>
+      </div>
+    </div> -->
+    <div id="section6">
+      <div class="title-box-d">
+        <h3 class="title-d">Send a message</h3>
+      </div>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="input-box">
+          <input type="text" placeholder="Enter your name" name="name" value="<?php echo $name; ?>">
         </div>
-        <div class="summary-list">
-          <ul class="list">
-            <li class="d-flex justify-content-between">
-              <strong>Property ID:</strong>
-              <span>1134</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Location:</strong>
-              <span>23 Street, New York, USA</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Property Type:</strong>
-              <span>House</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Status:</strong>
-              <span>Rent</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Area:</strong>
-              <span>340m
-                <sup>2</sup>
-              </span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Beds:</strong>
-              <span>4</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Baths:</strong>
-              <span>2</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Garage:</strong>
-              <span>1</span>
-            </li>
-          </ul>
+        <div class="input-box">
+          <input type="text" placeholder="Enter your email" name="email" value="<?php echo $email; ?>">
         </div>
-
-        <center><button style="background-color:#00B98E;margin-top:50px;width:300px;" id="popup" onclick="div_show()">Confirm Boooking</button></center>
+        <div class="input-box">
+          <textarea placeholder="Enter your Message" name="message" value="<?php echo $message; ?>" cols="60" rows="8" required></textarea>
+        </div>
         
-      </div>
-
-
+        <div class="button-contact">
+          <input type="submit" class="btn-primary"value="Send Now">
+        </div>
+      </form>
     </div>
-
-    <div class="row col-container">
-      <div class="col-items-a">
-        <div class="title-box-d">
-          <h3 class="title-d">Property Description</h3>
-        </div>
-        <div class="property-description ">
-          <p class="description">
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-            neque, auctor sit amet
-            aliquam vel, ullamcorper sit amet ligula. Cras ultricies ligula sed magna dictum porta.
-            Curabitur aliquet quam id dui posuere blandit. Mauris blandit aliquet elit, eget tincidunt
-            nibh pulvinar quam id dui posuere blandit.
-          </p>
-          <p class="description">
-            Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
-            malesuada. Quisque velit nisi,
-            pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-          </p>
-        </div>
-      </div>
-      <div class="col-items-b">
-        <div class="title-box-d">
-          <h3 class="title-d">Facilities</h3>
-        </div>
-        <div class="amenities-list">
-          <ul class="list-a" style="margin:0;">
-            <li>Balcony</li>
-            <li>Outdoor Kitchen</li>
-            <li>Cable Tv</li>
-            <li>Internet</li>
-            <li>Parking</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row col-container">
-      <div class="col-4">
-        <img src="img/agent-4.jpg" alt="" style="width:100%;height:auto">
-      </div>
-      <div class="col-4 px-5">
-        <div class="title-box-d">
-          <h3 class="title-d">Contact Agent</h3>
-        </div>
-        <div class="property-agent">
-          <h4 class="title-agent">Anabella Geller</h4>
-          <p class="description">
-            Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-            dui. Quisque velit nisi,
-            pretium ut lacinia in, elementum id enim.
-          </p>
-          <ul class="list-unstyled">
-            <li class="d-flex justify-content-between">
-              <strong>Phone:</strong>
-              <span class="color-text-a">(222) 4568932</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Mobile:</strong>
-              <span class="color-text-a">777 287 378 737</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Email:</strong>
-              <span class="color-text-a">annabella@example.com</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <strong>Skype:</strong>
-              <span class="color-text-a">Annabela.ge</span>
-            </li>
-          </ul>
-          <div class="socials-a">
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-dribbble" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="title-box-d">
-          <h3 class="title-d">Send a message</h3>
-        </div>
-        <div>
-          <input type="name" class="form-control" placeholder="Your Name" />
-          <input type="email" class="form-control" placeholder="Your email" />
-          <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
-
-          <button style="background-color:#00B98E;margin-top:20px;">Send Message</button>
-        </div>
-      </div>
-    </div>
-
-
   </div>
-  </div>
+
+
+  
   <?php include 'footer.php' ?>
   <script src="js/main.js"></script>
   <script>
-          // Validating Empty Field
+      // Validating Empty Field
       function check_empty() {
-      if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
-      alert("Fill All Fields !");
-      } else {
-      document.getElementById('form').submit();
-      alert("Form Submitted Successfully...");
-      }
-      }
-      //Function To Display Popup
-      function div_show() {
-      document.getElementById('abc').style.display = "block";
-      }
-      //Function to Hide Popup
-      function div_hide(){
-      document.getElementById('abc').style.display = "none";
+        if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
+        alert("Fill All Fields !");
+        } else {
+        document.getElementById('form').submit();
+        alert("Form Submitted Successfully...");
+        }
       }
   </script>
 </body>

@@ -1,12 +1,7 @@
 <?php
 include "./pertials/header.php";
 include "./database/config.php";
-
-if ($_SESSION["role_id"] != 1) {
-     header("location: ./welcome.php");
-     exit;
-}
-
+$user_id = $_SESSION['user_id'];
 ?>
 <div class="col-8 mt-5">
      <div class="card">
@@ -34,7 +29,12 @@ if ($_SESSION["role_id"] != 1) {
                     <tbody>
                          <?php
                          $i = 1;
-                         $sql = "SELECT booking.*, users.* FROM booking inner JOIN users ON booking.user_id=users.user_id";
+                         $sql = "SELECT* FROM (SELECT * FROM homes NATURAL JOIN 
+                         ((SELECT flat_id,home_id,
+                         user_id as customer_id,booking_date,duration,no_of_guest,is_available 
+                         FROM flats NATURAL JOIN booking)AS custom) 
+                         WHERE custom.home_id = homes.home_id)AS new_table 
+                         WHERE new_table.user_id = $user_id;";
                          $bookings = $link->query($sql);
 
                          while ($row = $bookings->fetch_assoc()) :
@@ -42,7 +42,12 @@ if ($_SESSION["role_id"] != 1) {
                               <tr>
                                    <td class="text-center"><?php echo $i++ ?></td>
                                    <td class="text-center">
-                                        <p><?php echo $row['name'] ?></p>
+                                        <?php
+                                        $customer_id = $row['customer_id'];
+                                        $user_data = $link->query("SELECT * FROM users WHERE user_id = $customer_id");
+                                        $user = $user_data->fetch_assoc();
+                                        ?>
+                                        <p><?php echo $user['name'] ?></p>
                                    </td>
                                    <td class="text-center">
                                         <p>Cash on spot</p>

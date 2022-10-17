@@ -25,7 +25,7 @@ if (isset($_GET['view'])) {
 
           $flat_id = $value['flat_id'];
           $home_id = $value['home_id'];
-          $flat_images = $value['flat_images'];
+          $images = explode(",", $value['flat_images']);
           $is_available = $value['is_available'];
           $flat_details_id =  $value['flat_details_id'];
           $floor =  $value['floor'];

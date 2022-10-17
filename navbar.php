@@ -229,7 +229,7 @@
       </button>
       <div class="dropdown-content">
         <a href="http://localhost/House_Rent_Web/testimonials.php" id="testimonial">Testimonials</a>
-        <a href="#">Link 2</a>
+        <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
       </div>
     </div>
     <a href="http://localhost/House_Rent_Web/contact.php" id="contact">Contact</a>

@@ -36,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $flat_no = trim($_POST["flat_no"]);
      }
      // Validate flat_no
-     if (empty(($_POST["flat_images"]))) {
-          $flat_images_err = "Please Enter Your flat_no.";
-     } else {
-          $flat_images = ($_POST["flat_images"]);
-     }
-
+     // if (empty(($_POST["flat_images"]))) {
+     //      $flat_images_err = "Please Enter Your flat_no.";
+     // } else {
+     //      $flat_images = ($_POST["flat_images"]);
+     // }
+     $flat_images = $_FILES["flat_images"];
 
      // Validate Is available
      if (empty(trim($_POST["available_from"]))) {
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $kitchen_no = trim($_POST["kitchen_no"]);
      }
 
-               // Validate bathroom_no
+     // Validate bathroom_no
      if (empty(trim($_POST["bathroom_no"]))) {
           $bathroom_no_err = "Please Enter Your bathroom_no.";
      } else {
@@ -85,20 +85,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $dining_room_no = trim($_POST["dining_room_no"]);
      }
 
-               // Validate short_description
+     // Validate short_description
      if (empty(trim($_POST["short_description"]))) {
           $short_description_err = "Please Enter Your short_description.";
      } else {
           $short_description = trim($_POST["short_description"]);
      }
-
-
      // Check input errors before inserting in database
      if (empty($home_id_err) && empty($flat_images_err) && empty($floor_err) && empty($flat_no_err) && empty($road_no_err) && empty($available_from_err)) {
 
+          //Multiple Image Upload
+          foreach ($flat_images['name'] as $pm) {
+               $imName[] = $pm;
+          }
+          $imageNameString = implode(',', $imName);
+
+          $targetDir = "../img/flat_images/";
+          foreach ($_FILES['flat_images']['name'] as $key => $val) {
+               // File upload path 
+               $fileName = basename($_FILES['flat_images']['name'][$key]);
+               $targetFilePath = $targetDir . $fileName;
+
+               // Check whether file type is valid 
+               $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+               move_uploaded_file($_FILES["flat_images"]["tmp_name"][$key], $targetFilePath);
+          }
+
           $user_id = $_SESSION["user_id"];
           // Prepare an insert statement
-          $sql = $link->query("INSERT INTO flats (home_id,flat_images,is_available) VALUES ('$home_id', '$flat_images',1)");
+          $sql = $link->query("INSERT INTO flats (home_id,flat_images,is_available) VALUES ('$home_id', '$imageNameString',1)");
           $sql1 = $link->query("INSERT INTO flat_details (flat_id,floor,flat_no,available_from,price,bedroom_no,kitchen_no,bathroom_no,dining_room_no,short_description) VALUES (LAST_INSERT_ID(),'$floor','$flat_no','$available_from','$price','$bedroom_no','$kitchen_no','$bathroom_no','$dining_room_no','$short_description')");
 
           if ($sql && $sql1) {

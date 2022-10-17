@@ -4,7 +4,7 @@ require_once "database/config.php";
 
 
 // Define variables and initialize with empty values
-$flat_id=$home_id = $flat_images = $floor = $flat_no = $available_from = $price = $bedroom_no = $kitchen_no = $bathroom_no = $dining_room_no = $short_description = "";
+$flat_id = $home_id = $flat_images = $floor = $flat_no = $available_from = $price = $bedroom_no = $kitchen_no = $bathroom_no = $dining_room_no = $short_description = "";
 
 
 if (isset($_GET['edit'])) {
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $kitchen_no = trim($_POST["kitchen_no"]);
      }
 
-               // Validate bathroom_no
+     // Validate bathroom_no
      if (empty(trim($_POST["bathroom_no"]))) {
           $bathroom_no_err = "Please Enter Your bathroom_no.";
      } else {
@@ -116,26 +116,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      if (empty($home_id_err) && empty($flat_images_err) && empty($floor_err) && empty($flat_no_err) && empty($road_no_err) && empty($available_from_err)) {
 
           $user_id = $_SESSION["user_id"];
+          $flat_id = $_POST["id"];
+
+          //Multiple Image Upload
+          foreach ($_FILES['flat_images']["name"] as $pm) {
+               $imName[] = $pm;
+          }
+          $imageNameString = implode(',', $imName);
+
+          $targetDir = "../img/flat_images/";
+          foreach ($_FILES['flat_images']['name'] as $key => $val) {
+               // File upload path 
+               $fileName = basename($_FILES['flat_images']['name'][$key]);
+               $targetFilePath = $targetDir . $fileName;
+
+               // Check whether file type is valid 
+               $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+               move_uploaded_file($_FILES["flat_images"]["tmp_name"][$key], $targetFilePath);
+          }
+
           // Prepare an insert statement
           $sql = $link->query(
-            "UPDATE flats 
-                SET home_id ='$home_id',flat_images='$flat_images',is_available='$is_available' 
-                WHERE flat_id = $id;"
-            );
+               "UPDATE flats 
+                SET home_id ='$home_id',flat_images='$imageNameString',is_available='1' 
+                WHERE flat_id = $flat_id"
+          );
           $sql1 = $link->query(
-            "UPDATE flat_details 
+               "UPDATE flat_details 
                 SET floor='$floor',flat_no ='$flat_no',available_from='$available_from',
                 price='$price',bedroom_no='$bedroom_no',kitchen_no='$kitchen_no',
                 bathroom_no='$bathroom_no',dining_room_no='$dining_room_no',short_description='$short_description'   
-                WHERE flat_id = $id;"
-            );
+                WHERE flat_id = $flat_id;"
+          );
 
           if ($sql && $sql1) {
                header("location: ./all_flats.php");
+          } else {
+               echo "Oops! Something went wrong. Please try again later.";
           }
-          else {
-            echo "Oops! Something went wrong. Please try again later.";
-        }
      }
 
      // Close connection

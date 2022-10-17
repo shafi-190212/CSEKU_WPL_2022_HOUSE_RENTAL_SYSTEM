@@ -1,6 +1,5 @@
 <?php
 include_once('database/config.php');
-$sql = $link->query("SELECT * FROM flats natural join flat_details");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,17 +82,19 @@ $sql = $link->query("SELECT * FROM flats natural join flat_details");
     <div class="grid-container">
       <?php 
       $i =1;
+      $sql = $link->query("SELECT * FROM flats natural join flat_details where is_available = 1");
       while ($row = $sql->fetch_assoc()) :
       ?>
       <div class="grid-items">
-        <img src="img/property-<?php echo $i?>.jpg" alt="property-1" style="width:100%">
+        <?php $images = explode(",", $row['flat_images']);?>
+        <img src="img/flat_images/<?php echo  $images[0]?>" alt="property-1" style="width:100%">
         <div class="container">
           <h2>৳<?php echo $row['price'] ?></h2>
           <?php $home_id = $row['home_id'];
             $house_data = $link->query("SELECT * FROM homes natural join locations where home_id = $home_id");
             $house = mysqli_fetch_array($house_data);
           ?>
-          <a class="d-block h5 mb-2" href="admin/flat_details.php?view=<?php echo $row["flat_id"];?>"><h3 class="text-primary text-center"><?php echo $house['house'] ?></h3></a>
+          <a class="d-block h5 mb-2" href="house-details.php?view=<?php echo $row["flat_id"];?>"><h3 class="text-primary text-center"><?php echo $house['house'] ?></h3></a>
           <p><i class="fa fa-map-marker-alt text-primary me-2"></i>IslamNagar,Khulna</p>
           <p><b class="text-primary me-2">Available from: </b> <?php echo $row['available_from'] ?> </p>
           <div class="d-flex border-top">
@@ -102,7 +103,7 @@ $sql = $link->query("SELECT * FROM flats natural join flat_details");
               <small class="text-center py-2 px-3"><i class="fa fa-bed text-primary me-2"></i> <?php echo $row['bedroom_no'] ?> Bed</small>
               <small class="text-center py-2 ps-3"><i class="fa fa-bath text-primary me-2"></i> <?php echo $row['bathroom_no'] ?> Bath</small>
           </div>
-          <p><button class="button my-2 py-3" onclick= 'location.href = "admin/flat_details.php?view=<?php echo $row["flat_id"];?>"'>View Details</button></p>
+          <p><button class="button my-2 py-3" onclick= 'location.href = "house-details.php?view=<?php echo $row["flat_id"];?>"'>View Details</button></p>
         </div>
         <?php $i++; 
         if ($i == 7) $i=1;

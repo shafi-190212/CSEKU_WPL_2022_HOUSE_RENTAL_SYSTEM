@@ -1,6 +1,12 @@
 <?php
 include "./pertials/header.php";
 include "./database/config.php";
+
+if ($_SESSION["role_id"] != 1) {
+     header("location: ./welcome.php");
+     exit;
+}
+
 ?>
 <div class="col-8 mt-5">
      <div class="card">
@@ -43,12 +49,12 @@ include "./database/config.php";
                                         <p><?php echo $row['contact_no'] ?></p>
                                    </td>
                                    <td class="text-center">
-                                       <div>
-                                       <a class="btn btn-outline-primary" href="editUser.php?edit=<?php echo $row['user_id']; ?>">Edit</a>
-                                        <a class="btn btn-outline-primary" href="editUser.php?edit=<?php echo $row['user_id']; ?>">Delete</a>
-                                       </div>
-                                        
-                                        
+                                        <div>
+                                             <a class="btn btn-outline-primary" href="editUser.php?edit=<?php echo $row['user_id']; ?>">Edit</a>
+                                             <a class="btn btn-outline-primary" href="editUser.php?edit=<?php echo $row['user_id']; ?>">Delete</a>
+                                        </div>
+
+
                                    </td>
                               </tr>
                          <?php endwhile; ?>

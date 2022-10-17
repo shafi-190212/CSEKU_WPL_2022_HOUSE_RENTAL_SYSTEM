@@ -1,12 +1,6 @@
 <?php
 include "./pertials/header.php";
 include "./database/config.php";
-
-if ($_SESSION["role_id"] != 1) {
-     header("location: ./welcome.php");
-     exit;
-}
-
 ?>
 <div class="col-8 mt-5">
      <div class="card">
@@ -33,21 +27,16 @@ if ($_SESSION["role_id"] != 1) {
                     <tbody>
                          <?php
                          $i = 1;
-                         $sql = "SELECT flats.*, flat_details.* FROM flats inner JOIN flat_details ON flats.flat_id=flat_details.flat_id";
+                         $user = htmlspecialchars($_SESSION["user_id"]);
+                         $sql = "SELECT * from homes join (SELECT * FROM flats natural join flat_details) as flat
+                         where flat.home_id = homes.home_id and user_id = $user;";
                          $homes = $link->query($sql);
                          while ($row = $homes->fetch_assoc()) :
                          ?>
                               <tr>
                                    <td class="text-center"><?php echo $i++ ?></td>
                                    <td class="text-center">
-                                        <?php
-                                        $h = $row['home_id'];
-                                        $sqlo = "SELECT homes.*, locations.* FROM homes inner JOIN locations ON homes.location_id=locations.location_id WHERE homes.home_id = $h ORDER BY homes.home_id";
-                                        $homes1 = $link->query($sqlo);
-                                        while ($row1 = $homes1->fetch_assoc()) :
-                                        ?>
-                                             <p><?php echo $row1['house'] ?></p>
-                                        <?php endwhile; ?>
+                                        <p><?php echo $row['house'] ?></p>
                                    </td>
                                    <td class="text-center">
                                         <p><?php echo $row['floor'] ?></p>
@@ -67,6 +56,7 @@ if ($_SESSION["role_id"] != 1) {
 
                                    <td class="text-center">
                                         <div><a class="btn btn-primary" href="editFlat.php?edit=<?php echo $row['flat_id']; ?>">Edit</a></div>
+                                        <div><a class="btn btn-danger" href="editFlat.php?delete=<?php echo $row['flat_id']; ?>">Delete</a></div>
                                    </td>
                               </tr>
                          <?php endwhile; ?>

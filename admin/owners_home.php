@@ -1,12 +1,6 @@
 <?php
 include "./pertials/header.php";
 include "./database/config.php";
-
-if ($_SESSION["role_id"] != 1) {
-     header("location: ./welcome.php");
-     exit;
-}
-
 ?>
 <div class="col-8 mt-5">
      <div class="card">
@@ -33,7 +27,8 @@ if ($_SESSION["role_id"] != 1) {
                     <tbody>
                          <?php
                          $i = 1;
-                         $sql = "SELECT homes.*, locations.* FROM homes inner JOIN locations ON homes.location_id=locations.location_id ORDER BY homes.home_id";
+                         $user = htmlspecialchars($_SESSION["user_id"]);
+                         $sql = "SELECT homes.*, locations.* FROM homes inner JOIN locations ON homes.location_id=locations.location_id WHERE homes.user_id=$user ORDER BY homes.home_id";
                          $homes = $link->query($sql);
                          while ($row = $homes->fetch_assoc()) :
                          ?>

@@ -28,11 +28,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
           <div class="col-3">
                <div class="sidebar">
                     <a class="active" href="welcome.php">HomeLand</a>
-                    <a href="../index.php"><i class="fa-solid fa-house-user"></i> HomeLand WebSite</a>
-                    <a href="./all_user.php"><i class="fa fa-users" style="padding-right: 5px;"></i></i>Users</a>
-                    <a href="all_home.php"><i class="fa-solid fa-house" style="padding-right: 5px;"></i>Houses</a>
-                    <a href="all_flats.php"><i class="fa-solid fa-list" style="padding-right: 5px;"></i>Flats</a>
-                    <a href="all_bookings.php"><i class="fa-solid fa-cart-shopping" style="padding-right: 5px;"></i>Bookings</a>
+                    <?php if (htmlspecialchars($_SESSION["role_id"] == 1)) { ?>
+                         <a href="../index.php"><i class="fa-solid fa-house-user"></i> HomeLand WebSite</a>
+                         <a href="./all_user.php"><i class="fa fa-users" style="padding-right: 5px;"></i></i>Users</a>
+                         <a href="all_home.php"><i class="fa-solid fa-house" style="padding-right: 5px;"></i>Houses</a>
+                         <a href="all_flats.php"><i class="fa-solid fa-list" style="padding-right: 5px;"></i>Flats</a>
+                         <a href="all_bookings.php"><i class="fa-solid fa-cart-shopping" style="padding-right: 5px;"></i>Bookings</a>
+                    <?php } else { ?>
+                         <a href="../index.php"><i class="fa-solid fa-house-user"></i> HomeLand WebSite</a>
+                         <a href="owners_home.php"><i class="fa-solid fa-house" style="padding-right: 5px;"></i>Houses</a>
+                         <a href="owners_flats.php"><i class="fa-solid fa-list" style="padding-right: 5px;"></i>Flats</a>
+                         <a href="owners_booking.php"><i class="fa-solid fa-cart-shopping" style="padding-right: 5px;"></i>Bookings</a>
+                    <?php }; ?>
                     <!-- <a href="all_flats.php"><i class="fa-solid fa-blog" style="padding-right: 5px;"></i>posts</a>
                     <a href="all_home.php"><i class="fa-solid fa-list" style="padding-right: 5px;"></i>Payments</a> -->
                     <hr />
@@ -40,4 +47,3 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <a href="../logout.php"> <i class="fa-solid fa-right-from-bracket" style="padding-right: 5px;"></i>Sign Out</a>
                </div>
           </div>
-         
