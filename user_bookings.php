@@ -13,8 +13,6 @@ $user_id = $_SESSION['user_id'];
 
      <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-     <title>Hello, world!</title>
 </head>
 
 <body>
@@ -42,10 +40,10 @@ $user_id = $_SESSION['user_id'];
                               $i = 1;
                               $sql = "SELECT* FROM (SELECT * FROM homes NATURAL JOIN 
                          ((SELECT flat_id,home_id,
-                         user_id as customer_id,booking_date,duration,no_of_guest,is_available 
+                         user_id as customer_id,booking_date,duration,is_available as booked,no_of_guest
                          FROM flats NATURAL JOIN booking)AS custom) 
                          WHERE custom.home_id = homes.home_id)AS new_table 
-                         WHERE new_table.user_id = $user_id;";
+                         WHERE new_table.customer_id = $user_id;";
                               $bookings = $link->query($sql);
 
                               while ($row = $bookings->fetch_assoc()) :
@@ -89,11 +87,11 @@ $user_id = $_SESSION['user_id'];
                                         <td class="text-center">
                                              <p><?php echo $row['no_of_guest'] ?></p>
                                         </td>
-                                        <td class="text-center">
-                                             <?php if ($row['is_available'] == 1) { ?>
+                                        <td class="text-center"> 
+                                             <?php if ($row['booked'] == 1) { ?>
                                                   <p class="text-warning">Pending</p>
-                                             <?php } else if ($row['is_available'] == 0) { ?>
-                                                  <p class="text-warning">Confirmed</p>
+                                             <?php } else if ($row['booked'] == 0) { ?>
+                                                  <p class="text-info">Confirmed</p>
                                              <?php } ?>
                                         </td>
 

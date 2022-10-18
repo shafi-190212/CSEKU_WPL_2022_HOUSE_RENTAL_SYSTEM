@@ -21,14 +21,14 @@ if ($_SESSION["role_id"] != 1) {
                     <thead>
                          <tr>
                               <th scope="col">SL</th>
-                              <th scope="col">User Name</th>
-                              <th scope="col">Payment Id</th>
+                              <th scope="col">Customer Name</th>
+                              <th scope="col">Payment Type</th>
                               <th scope="col">Home Name</th>
                               <th scope="col">Flat No</th>
                               <th scope="col">Booking Date</th>
                               <th scope="col">Duration</th>
                               <th scope="col">No of Guest</th>
-                              <th scope="col">Payment Type</th>
+                              <th scope="col">Action</th>
                          </tr>
                     </thead>
                     <tbody>
@@ -84,7 +84,7 @@ if ($_SESSION["role_id"] != 1) {
                                         <p><?php echo $row['no_of_guest'] ?></p>
                                    </td>
                                    <td class="text-center">
-                                        <div><a class="btn btn-outline-primary" href="editFlat.php?edit=<?php echo $row['flat_id']; ?>">Edit</a></div>
+                                        <div><a class="btn btn-info" href="flat_details.php?view=<?php echo $row['flat_id']; ?>">View</a></div>
                                    </td>
                               </tr>
                          <?php endwhile; ?>

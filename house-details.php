@@ -367,6 +367,9 @@ padding-left: 0;
             <strong>Dining Room:</strong><?php echo $dining_room_no?>
             <span></span>
           </li>
+          <li class="d-flex justify-content-between">
+            <h3 style="color: var(--primary)">Price: ৳<?php echo $price?></h3>
+          </li>
 
         </ul>  
       </div>

@@ -30,8 +30,8 @@
     /* At the top */
     z-index: 99;
     display: grid;
-    grid-template-rows: repeat(auto,1fr);
-    grid-template-columns:repeat(3,minmax(300px,1fr));
+    grid-template-rows: repeat(auto, 1fr);
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
     align-items: center;
   }
 
@@ -158,19 +158,21 @@
   /* Add responsiveness - on screens less than 580px wide, display the navbar vertically instead of horizontally */
 
   @media screen and (max-width: 600px) {
-    #navbar{
-      grid-template-columns:repeat(2,1fr);
+    #navbar {
+      grid-template-columns: repeat(2, 1fr);
       align-items: center;
       padding: 15px 5px;
     }
-    #navbar-right{
+
+    #navbar-right {
       display: hidden !important;
       grid-column-start: 1;
       grid-column-end: 3;
       align-self: left;
       justify-self: start;
-      padding: 0px all ;
+      padding: 0px all;
     }
+
     #navbar-right a:not(:first-child) .dropdown .dropbtn {
       display: none;
     }
@@ -218,7 +220,7 @@
     </div>
     <h1 class="m-0 text-primary">HomeLand</h1>
   </a>
-  <a href="javascript:void(0);" class="icon" style="justify-self:end;"onclick="myFunction()"><i class="fa fa-bars"></i></a>
+  <a href="javascript:void(0);" class="icon" style="justify-self:end;" onclick="myFunction()"><i class="fa fa-bars"></i></a>
   <div id="navbar-right">
     <a href="http://localhost/House_Rent_Web/index.php" id="home">Home</a>
     <a href="http://localhost/House_Rent_Web/about.php" id="about">About</a>
@@ -242,7 +244,7 @@
           <a href="http://localhost/House_Rent_Web/register.php">Signup</a>
         </div>
 
-      <?php } else if(htmlspecialchars($_SESSION["role_id"] == 1 or $_SESSION["role_id"] == 2)){ ?>
+      <?php } else if (htmlspecialchars($_SESSION["role_id"] == 1 or $_SESSION["role_id"] == 2)) { ?>
         <button class="dropbtn" id="login">Dashboard
           <i class="fa fa-caret-down"></i>
         </button>
@@ -251,16 +253,19 @@
           <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
           <a href="http://localhost/House_Rent_Web/logout.php">Logout</a>
         </div>
-      <?php }else{ ?>
+      <?php } else { ?>
         <button class="dropbtn" id="login">Profile
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
           <a href="http://localhost/House_Rent_Web/user_profile.php">Profile</a>
+          <div class="dropdown-content">
+            <a href="http://localhost/House_Rent_Web/user_bookings.php">Bookings</a>
+          </div>
           <a href="http://localhost/House_Rent_Web/logout.php">Logout</a>
         </div>
       <?php } ?>
-        
+
 
     </div>
 
