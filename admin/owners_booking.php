@@ -16,14 +16,15 @@ $user_id = $_SESSION['user_id'];
                     <thead>
                          <tr>
                               <th scope="col">SL</th>
-                              <th scope="col">User Name</th>
+                              <th scope="col">Customer Name</th>
                               <th scope="col">Payment Id</th>
                               <th scope="col">Home Name</th>
                               <th scope="col">Flat No</th>
                               <th scope="col">Booking Date</th>
                               <th scope="col">Duration</th>
                               <th scope="col">No of Guest</th>
-                              <th scope="col">Payment Type</th>
+                              <th scope="col">Actions</th>
+                              <th scope="col">Confirm Booking</th>
                          </tr>
                     </thead>
                     <tbody>
@@ -91,6 +92,11 @@ $user_id = $_SESSION['user_id'];
                                    <td class="text-center">
                                         <div><a class="btn btn-outline-primary" href="editFlat.php?edit=<?php echo $row['flat_id']; ?>">Edit</a></div>
                                    </td>
+                                   <?php if ($row['flat_id']) { ?>
+                                        <td class="text-center">
+                                             <div><a class="btn btn-warning" href="confirmFlat.php?edit=<?php echo $row['flat_id']; ?>">Confirm</a></div>
+                                        </td>
+                                   <?php } ?>
                               </tr>
                          <?php endwhile; ?>
                     </tbody>
